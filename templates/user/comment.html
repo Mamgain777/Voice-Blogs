@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'main/base.html'%}
+{% block body_block%}
+    <div class="createBlog container">
+        <h2 class="text-center">This is Comment page</h2>
+        <form method="post" class="text-center">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button class="btn btn-success">
+                    Comment
+                </button>
+                
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

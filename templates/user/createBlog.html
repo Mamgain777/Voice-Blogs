@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends 'main/base.html'%}
+{% block body_block%}
+    <div class="createBlog container">
+        <h2 class="text-center">Create Your Blog</h2>
+        <form method="post" class="text-center" id="createBlog">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="text-center">
+                <button class="btn btn-success">
+                    {% if blog.publish_date %}
+                        Update
+                    {% else %}
+                        Save
+                    {% endif %}                
+                </button>
+                
+            </div>
+        </form>
+        <a href="{% url 'user:myBlogs'%}" class="btn btn-secondary">Back</a>
+
+    </div>
+{% endblock %}

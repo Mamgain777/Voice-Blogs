@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      {% block title_block %}
+      VOICE BLOGS
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    {% block link_block%}
+    {%endblock%}
+</head>
+<body>
+  <div class="container text-center">
+    <h1>VOICE BLOGS</h1>
+    <h6>Explore Experiment Express</h6>
+    <a class="nav-link" href="/admin">Admin</a>
+  </div>
+  <nav class="navbar  sticky-top" style="background-color: #e3f2fd;">
+    <div class="container-fluid" >
+      <div>
+        <a class="navbar-brand" href="{% url 'main:home' %}">VOICE</a>
+      </div>
+      <div>
+        <h2 class="text-center">Welcome {{user.username}}</h2>
+      </div>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="background-color: #e3f2fd;">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+          Hii, {{user.username}}
+          </h5>
+          <button type="button" class="btn-close btn-close-black" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'main:home' %}">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a href="{% url 'user:createBlog' user.pk %}" class="nav-link" aria-current="page">Create Blog</a>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'user:myBlogs' %}">My Blogs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'user:myDrafts' %}">Drafts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{% url 'logout' %}"><b>Logout</b></a>
+            </li>
+            
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:home' %}">About</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'main:register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}"><b>Login</b></a>
+            </li>
+            {% endif %}
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+    {% block body_block%}
+    {% endblock%}
+
+    <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

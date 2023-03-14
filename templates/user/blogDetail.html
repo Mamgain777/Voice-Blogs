@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends 'main/base.html'%}
+{% block title_block %}
+{{blog.title}}
+{% endblock %}
+{% block body_block %}
+    
+    <div class="container" id="blog-detail">
+        <h2 class="text-center">{{blog.title}}</h2>
+        <h6 class="text-center">By: {{blog.author.username}}</h6>
+        {% if blog.publish_date == null %}
+        <div class="text-center">
+            <a href="{% url 'user:publishBlog' blog.pk%}"><button class="btn btn-warning">Publish</button></a>
+        </div>
+        {% else %}
+        <h6 class="text-center">{{blog.publish_date|date:"l, d F Y"}}</h6>
+        {% endif %}
+        <hr>
+        <p>{{ blog.content|safe }}</p>
+        <hr>
+        <div class="funcBlog">
+            <a href="{% url 'main:home' %}" class="btn btn-secondary">Home</a>
+            {% if blog.author.username == user.username %}
+                <a href="{% url 'user:deleteBlog' blog.pk %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'user:editBlog' blog.pk %}" class="btn btn-secondary">Edit</a>
+            {% endif %}
+        </div>
+        <hr>
+        {% if blog.publish_date %}
+            <h4>Comments....</h4>
+            <a href="{% url 'user:comment' user.username blog.pk %}">Add Comment</a>
+            
+            <div class="container" id="comments">
+                {% for comment in blog.comments.all %}
+                    <h6>{{ comment.author}} - {{ comment.time }}&emsp;
+                        {%if user.username == blog.author.username %}
+                            <a href="{% url 'user:deleteComment' comment.pk %}">Delete</a>
+                        {% endif %}
+                    </h6>
+                    <p style="padding-left: 20px;">{{ comment.text }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
