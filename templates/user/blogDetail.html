@@ -8,6 +8,7 @@
     <div class="container" id="blog-detail">
         <h2 class="text-center">{{blog.title}}</h2>
         <h6 class="text-center">By: {{blog.author.username}}</h6>
+        <h5 class="text-center" style="color: red; ">{{ blog.title_tag }}</h5>
         {% if blog.publish_date == null %}
         <div class="text-center">
             <a href="{% url 'user:publishBlog' blog.pk%}"><button class="btn btn-warning">Publish</button></a>
@@ -16,6 +17,7 @@
         <h6 class="text-center">{{blog.publish_date|date:"l, d F Y"}}</h6>
         {% endif %}
         <hr>
+        <h5 class="text-center">Category: {{blog.category}}</h5>
         <p>{{ blog.content|safe }}</p>
         <hr>
         <div class="funcBlog">

@@ -1,5 +1,5 @@
 from django import forms
-from user.models import Comment,Blog
+from user.models import Comment,Blog, Category
 
 class CommentForm(forms.ModelForm):
 
@@ -24,14 +24,22 @@ class CommentForm(forms.ModelForm):
 
 input_style = 'background-color: aliceblue; border: 1px solid black;'
 
+category = Category.objects.all().values_list('name','name')
+category_list = []
+
+for item in category:
+    category_list.append(item)
+
 class CreateBlogForm(forms.ModelForm):
 
     class Meta:
         model = Blog
-        fields = ('title','content')
+        fields = ('title','title_tag', 'category','content')
 
         labels = {
             'title': '',
+            'title_tag': '',
+            'category': '',
             'content': ''
         }
 
@@ -39,6 +47,15 @@ class CreateBlogForm(forms.ModelForm):
             "title": forms.TextInput(attrs={
             'placeholder': "Enter Blog Title",
             'class': "form form-control text-center",
+            'style': input_style,
+            }),
+            "title_tag": forms.TextInput(attrs={
+            'placeholder': "Enter Blog Tag",
+            'class': "form form-control text-center",
+            'style': input_style,
+            }),
+            "category": forms.Select(choices= category_list,attrs={
+            'class': "form form-select text-center",
             'style': input_style,
             }),
             "content": forms.Textarea(attrs={
