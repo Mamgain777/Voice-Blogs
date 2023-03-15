@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from main.forms import CustomUserCreationForm
 from django.urls import reverse_lazy
-from user.models import Blog
+from user.models import Blog,Category
 
 # Create your views here.
 
@@ -14,8 +14,15 @@ class HomePage(generic.ListView):
     model = Blog
     context_object_name = 'blogs'
     template_name = 'main/home.html'
-    
+
+    def get_context_data(self,*args, **kwargs):
+        contex =  super(HomePage,self).get_context_data(*args,**kwargs)
+        contex['cat_list'] = Category.objects.all()
+        
+        return contex
+
     def get_queryset(self, *args,**kwargs):
+        
         return Blog.objects.all().filter(publish_date__isnull=False).order_by('-publish_date')
 
 

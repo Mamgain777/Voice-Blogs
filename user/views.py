@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy,reverse
 from django.views import generic
-from user.models import Blog, Comment
+from user.models import Blog, Comment, Category
 from user.forms import CommentForm,CreateBlogForm
 
 from django.contrib.auth.decorators import login_required
@@ -11,19 +11,22 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 
 
-# Create your views here.
+# # Create your views here.
 # class MyBlogs(generic.ListView):
 #     model = Blog
 #     template_name = "user/myBlogs.html"
 #     context_object_name = 'blogs'
 
 #     def get_queryset(self, *args,**kwargs):
-#         return Blog.objects.filter(author = self.kwargs.get('pk'))
+#         return Blog.objects.filter(author_id = self.kwargs.get('pk'))
     
 @login_required
-def my_blogs(request):
+def my_blogs(request,user):
 
-    blogs = Blog.objects.all().filter(publish_date__isnull=False)
+    # print(user)
+    author = User.objects.filter(username=user)[0].pk
+    # print(author)
+    blogs = Blog.objects.all().filter(author=author, publish_date__isnull=False)
     return render(request, 'user/myBlogs.html', {'blogs':blogs})
 
 class BlogDetailView(LoginRequiredMixin, generic.DetailView):
@@ -63,7 +66,9 @@ class DraftListView(LoginRequiredMixin,generic.ListView):
     context_object_name = 'blogs'
 
     def get_queryset(self):
-        return Blog.objects.filter(publish_date__isnull=True)
+        author = User.objects.filter(username = self.kwargs['user'])[0].pk
+        print(author)
+        return Blog.objects.all().filter(author=author, publish_date__isnull=True)
 
 class DeleteBlogView(LoginRequiredMixin,generic.DeleteView):
     model = Blog
@@ -102,3 +107,12 @@ def delete_comment(request, pk):
     blog_pk = comment.blog.pk
     comment.delete()
     return HttpResponseRedirect(reverse('blog-detail',kwargs={'pk':blog_pk}))
+
+
+def CategoryView(request, category,name=""):
+
+    data = Blog.objects.filter(category=category.title().replace("-"," "))
+    cat_list = Category.objects.all()
+    
+
+    return render(request, 'user/category.html', {'category': category,'blogs':data,'cat_list':cat_list})

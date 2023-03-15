@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 {% extends 'main/base.html'%}
 {% block body_block %}
-<div class="container text-center" id="blogCreate">
-    <a href="{% url 'user:createBlog' user.pk %}" class="btn btn-danger">Create Blog</a>
-</div>
-    {% for blog in blogs %}
-    {% if blog.author.username == user.username%}
-    <div class="blog container">
-        <h3 class="text-center"><a href="{% url 'blog-detail' blog.pk %}">{{blog.title}}</a></h3>
-        <h6 class="text-center">By: {{blog.author.username}}</h6>
-        <p>{{ blog.content|slice:":100"|safe }}..................</p>
+    <div class="container text-center" id="blogCreate">
+        <a href="{% url 'user:createBlog' user.pk %}" class="btn btn-danger">Create Blog</a>
     </div>
+    <!-- {% include 'main/test.html'%} -->
+    {% if blogs %}
+        {% for blog in blogs %}
+        
+        <div class="blog container">
+            <a href="{% url 'blog-detail' blog.pk %}">
+                <h3 class="text-center">{{blog.title}}</h3>
+                <h6 class="text-center">By: {{blog.author.username}}</h6>
+            </a>
+                <p>{{ blog.content|slice:":100" }}..................</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2 class="text-center" style="margin-top: 20px;">No Blogs Here</h2>
     {% endif %}
-    {% endfor %}
 {% endblock %}

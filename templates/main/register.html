@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 {% extends 'main/base.html'%}
+{% block link_block%}
+    <link rel="stylesheet" href="/static/css/register.css">
+{% endblock %}
 {% block body_block %}
     <h2 class="text-center">
         Register Yourself
@@ -7,7 +10,10 @@
         <form method="post" class="container">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="btn btn-success " type="submit">Register</button>
+            <div class="text-center">
+                
+                <button class="btn btn-success " type="submit">Register</button>
+            </div>
             
         </form>
 {% endblock %}
