@@ -18,18 +18,16 @@ body::-webkit-scrollbar{
     padding: 10px;
 }
 
-a{
+.blog a{
     text-decoration: none;
     color: black;
 }
 
-a:hover{
-    color: whitesmoke;
+.blog:hover{
+    background-color: skyblue;
 }
 
-#blogCreate{
-    margin-top: 10px;
-}
+
 
 #blog-detail{
     margin-top: 20px;
@@ -46,10 +44,10 @@ a:hover{
     margin-top: 10px;
 }
 
-.blog-all{
+/* .blog-all{
     display: grid;
     grid-template-columns: repeat(2,auto);
-}
+} */
 
 #createBlog{
     border: 2px solid black;

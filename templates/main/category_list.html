@@ -1,0 +1,25 @@
+<div class="dropdown text-center"style="margin: 20px;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {%if category%}
+      {{category|title}}
+      {% else %}
+      ALL BLOGS
+      {%endif%}
+    </button>
+    <ul class="dropdown-menu">
+      {%if page == "myBlogs" %}
+        <li><a class="dropdown-item" href="{% url 'user:myBlogs' user.username %}">ALL BLOGS</a></li>
+      {%elif page == "myDrafts" %}
+        <li><a class="dropdown-item" href="{% url 'user:myDrafts' user.username %}">ALL BLOGS</a></li>
+      {% else %}
+        <li><a class="dropdown-item" href="{% url 'main:home' %}">ALL BLOGS</a></li>
+      {% endif %}
+      {% for cat in cat_list %}
+        {% if page %}
+        <li><a class="dropdown-item" href="{% url 'user:category' category=cat.name|slugify user=user.username page=page %}">{{ cat.name }}</a></li>
+        {%else%}
+        <li><a class="dropdown-item" href="{% url 'user:category' cat.name|slugify %}">{{ cat.name }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>

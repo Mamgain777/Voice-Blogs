@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 {% extends 'main/base.html'%}
 {% block body_block %}
-    {% include 'main/test.html'%}
+    {% include 'main/category_list.html'%}
     {% if blogs %}
     <div class="blog-all container-fluid">
 
         {% for blog in blogs %}
         <div class="blog container-fluid">
-            <h3 class="text-center"><a href="{% url 'blog-detail' blog.pk %}">{{blog.title}}</a></h3>
-            <h6 class="text-center">By: {{blog.author.username}}</h6>
-            <h6 class="text-center">{{blog.publish_date|date:"d/m/y"}}</h6>
+            <a href="{% url 'blog-detail' blog.pk %}">
 
-            <p>{{ blog.content|slice:":80"|safe }}..........</p>
+                <h3 class="text-center">{{blog.title}}</h3>
+                <h6 class="text-center">By: {{blog.author.username}}</h6>
+                <h6 class="text-center">{{blog.publish_date|date:"d/m/y"}}</h6>
+                
+                <p>{{ blog.content|slice:":100" }}..........</p>
+            </a>
             
         </div>
         {% endfor %}

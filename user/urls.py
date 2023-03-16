@@ -15,5 +15,6 @@ urlpatterns = [
     path("deleteComment/<int:pk>", delete_comment , name='deleteComment'),
     path("<str:uname>/comment/<int:pk>", add_a_comment, name='comment'),
     path("category/<str:category>", CategoryView, name='category'),
+    path("<str:user>/<str:page>/<str:category>", CategoryView, name='category'),
 
 ]

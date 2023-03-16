@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends 'main/base.html'%}
 {% block body_block %}
-{% include 'main/test.html' %}
+{% include 'main/category_list.html' %}
     <div class="blog-all container-fluid">
 
         {% for blog in blogs %}
@@ -11,9 +11,9 @@
                 <h3 class="text-center">{{blog.title}}</h3>
                 <h6 class="text-center">By: {{blog.author.username}}</h6>
                 <h6 class="text-center">{{blog.publish_date|date:"d/m/y"}}</h6>
-                </a>
                 
-                <p>{{ blog.content|slice:":50" }}..........</p>
+                <p>{{ blog.content|slice:":100" }}..........</p>
+                </a>
                 
         </div>
         {% endfor %}

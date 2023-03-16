@@ -27,7 +27,7 @@ def my_blogs(request,user):
     author = User.objects.filter(username=user)[0].pk
     # print(author)
     blogs = Blog.objects.all().filter(author=author, publish_date__isnull=False)
-    return render(request, 'user/myBlogs.html', {'blogs':blogs})
+    return render(request, 'user/myBlogs.html', {'blogs':blogs,'page':'myBlogs','cat_list': Category.objects.all()})
 
 class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     login_url = '/login/'
@@ -65,9 +65,16 @@ class DraftListView(LoginRequiredMixin,generic.ListView):
     model = Blog
     context_object_name = 'blogs'
 
+    def get_context_data(self,*args, **kwargs):
+        contex =  super(DraftListView,self).get_context_data(*args,**kwargs)
+        contex['cat_list'] = Category.objects.all()
+        contex['page'] = "myDrafts"
+        
+        return contex
+
     def get_queryset(self):
         author = User.objects.filter(username = self.kwargs['user'])[0].pk
-        print(author)
+        # print(author)
         return Blog.objects.all().filter(author=author, publish_date__isnull=True)
 
 class DeleteBlogView(LoginRequiredMixin,generic.DeleteView):
@@ -109,10 +116,21 @@ def delete_comment(request, pk):
     return HttpResponseRedirect(reverse('blog-detail',kwargs={'pk':blog_pk}))
 
 
-def CategoryView(request, category,name=""):
+def CategoryView(request, category,user="",page=""):
+
+    cat_list = Category.objects.all()
+    if user != "":
+        user_id = User.objects.filter(username = user)[0].pk
+        data = []
+        if page == "myBlogs":
+            data = Blog.objects.filter(author=user_id,publish_date__isnull=False,category=category.title().replace("-"," "))
+        else:
+            data = Blog.objects.filter(author=user_id,publish_date__isnull=True,category=category.title().replace("-"," "))
+        
+        return render(request, 'user/category.html', {'category': category,'blogs':data,'cat_list':cat_list,'page':page})
+
 
     data = Blog.objects.filter(category=category.title().replace("-"," "))
-    cat_list = Category.objects.all()
     
 
     return render(request, 'user/category.html', {'category': category,'blogs':data,'cat_list':cat_list})
