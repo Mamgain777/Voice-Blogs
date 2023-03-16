@@ -45,10 +45,10 @@ body::-webkit-scrollbar{
     margin-top: 10px;
 }
 
-.blog-all{
+/* .blog-all{
     display: grid;
     grid-template-columns: repeat(2,auto);
-}
+} */
 
 #createBlog{
     border: 2px solid black;

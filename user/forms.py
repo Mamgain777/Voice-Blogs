@@ -59,9 +59,7 @@ class CreateBlogForm(forms.ModelForm):
             'style': input_style,
             }),
             "content": forms.Textarea(attrs={
-            'placeholder': "Type Your Content Here",
-            'rows': 5,
             'style': f"resize:none;{input_style}",
-            'class': "form form-control",
+            'class': "editable medium-editor-textarea form form-control",
             })
         }
