@@ -1,6 +1,6 @@
 from django.urls import path
 from main.views import HomePage
-from user.views import my_blogs, CreateBlogView, UpdateBlogView, blog_publish, DraftListView, DeleteBlogView, add_a_comment, delete_comment,CategoryView
+from user.views import my_blogs, CreateBlogView, UpdateBlogView, blog_publish, DraftListView, DeleteBlogView, add_a_comment, delete_comment,CategoryView, like_blog
 
 app_name = 'user'
 urlpatterns = [
@@ -8,10 +8,11 @@ urlpatterns = [
     path("<str:user>/myBlogs",my_blogs, name='myBlogs'),
     # path("myBlogs",MyBlogs.as_view(), name='myBlogs'),
     path("<str:user>/myDrafts", DraftListView.as_view(), name='myDrafts'),
-    path("createBlog/<int:pk>",CreateBlogView.as_view(), name='createBlog'),
+    path("<str:user>/createBlog",CreateBlogView.as_view(), name='createBlog'),
     path("edit/<int:pk>",UpdateBlogView.as_view(), name='editBlog'),
     path("publish/<int:pk>", blog_publish, name='publishBlog'),
-    path("delete/<int:pk>", DeleteBlogView.as_view() , name='deleteBlog'),
+    path("like/<int:pk>", like_blog, name='likeBlog'),
+    path("<str:user>/delete/<int:pk>", DeleteBlogView.as_view() , name='deleteBlog'),
     path("deleteComment/<int:pk>", delete_comment , name='deleteComment'),
     path("<str:uname>/comment/<int:pk>", add_a_comment, name='comment'),
     path("category/<str:category>", CategoryView, name='category'),

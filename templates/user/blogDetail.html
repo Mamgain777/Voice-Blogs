@@ -3,6 +3,9 @@
 {% block title_block %}
 {{blog.title}}
 {% endblock %}
+{% block link_block %}
+<link rel="stylesheet" href="/static/css/blog_detail.css">
+{% endblock %}
 {% block body_block %}
     
     <div class="container" id="blog-detail">
@@ -16,16 +19,30 @@
         {% else %}
         <h6 class="text-center">{{blog.publish_date|date:"l, d F Y"}}</h6>
         {% endif %}
+        <p class="text-center"><strong>Category: {{blog.category}}</strong></p>
+        <div class="text-center" id="updateLinks">
+            
+            {% if blog.author.username == user.username %}
+            <a style="margin-right: 10px;" href="{% url 'user:deleteBlog' pk=blog.pk user=user.username %}">Delete</a>
+            
+            <a href="{% url 'user:editBlog' blog.pk %}">Edit</a>
+            {% endif %}
+        </div>
         <hr>
-        <h5 class="text-center">Category: {{blog.category}}</h5>
         <p>{{ blog.content|safe }}</p>
         <hr>
-        <div class="funcBlog">
+        <div class="funcBlog" >
+            <form action="{% url 'user:likeBlog' blog.pk %}" method="post" style="display: flex; flex-direction: row;">
+                {% csrf_token %}
+                {% if liked %}
+                <button class="btn btn-danger">Unlike</button>
+                {% else %}
+                <button class="btn btn-primary">Like</button>
+                {% endif %}
+                <h6 class="text-center" style="padding-top: 7px;">&ensp;-{{ likes }} likes</h6>
+            </form>
             <a href="{% url 'main:home' %}" class="btn btn-secondary">Home</a>
-            {% if blog.author.username == user.username %}
-                <a href="{% url 'user:deleteBlog' blog.pk %}" class="btn btn-danger">Delete</a>
-                <a href="{% url 'user:editBlog' blog.pk %}" class="btn btn-secondary">Edit</a>
-            {% endif %}
+            
         </div>
         <hr>
         {% if blog.publish_date %}
@@ -46,3 +63,6 @@
     </div>
 
 {% endblock %}
+
+
+

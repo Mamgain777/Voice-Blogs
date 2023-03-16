@@ -14,8 +14,8 @@ body::-webkit-scrollbar{
     background-color: yellowgreen;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 90%;
-    padding: 10px;
+    width: 80%;
+    padding: 20px;
 }
 
 .blog a{
@@ -26,6 +26,7 @@ body::-webkit-scrollbar{
 .blog:hover{
     background-color: skyblue;
 }
+
 
 
 
@@ -44,10 +45,10 @@ body::-webkit-scrollbar{
     margin-top: 10px;
 }
 
-/* .blog-all{
+.blog-all{
     display: grid;
     grid-template-columns: repeat(2,auto);
-} */
+}
 
 #createBlog{
     border: 2px solid black;

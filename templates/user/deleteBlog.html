@@ -1,9 +1,13 @@
 {% extends "main/base.html" %}
 {% block body_block %}
+  {%if user.username == blog.author.username%}
   <form  method="post" class="deleteBlog container">
     {% csrf_token %}
     <p>Are you sure you want to delete "{{ blog }}"?</p>
     <input class='btn btn-danger' type="submit" value="Confirm" />
     <a href="{% url 'blog-detail' blog.pk %}" class="btn btn-warning">Cancel</a>
   </form>
+  {% else %}
+  <h1 class="text-center" style="margin-top: 20px;">Sorry!! NO Such page exist</h1>
+  {% endif %}
 {% endblock %}

@@ -40,7 +40,7 @@ class CreateBlogForm(forms.ModelForm):
             'title': '',
             'title_tag': '',
             'category': '',
-            'content': ''
+            'content': 'Content'
         }
 
         widgets = {

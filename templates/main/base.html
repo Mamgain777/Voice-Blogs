@@ -15,7 +15,7 @@
     {%endblock%}
 </head>
 <body>
-  <div class="container text-center">
+  <div class="container text-center" id="voice">
     <h1>VOICE BLOGS</h1>
     <h6>Explore Experiment Express</h6>
     <a class="nav-link" href="/admin">Admin</a>
@@ -48,7 +48,7 @@
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item">
-              <a href="{% url 'user:createBlog' user.pk %}" class="nav-link" aria-current="page">Create Blog</a>
+              <a href="{% url 'user:createBlog' user.username %}" class="nav-link" aria-current="page">Create Blog</a>
 
             </li>
             <li class="nav-item">

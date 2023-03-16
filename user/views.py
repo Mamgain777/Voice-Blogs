@@ -34,6 +34,19 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
     model = Blog
     context_object_name = 'blog'
     template_name = 'user/blogDetail.html'
+
+    def get_context_data(self, *args,**kwargs):
+        contex =  super(BlogDetailView, self).get_context_data(*args,**kwargs)
+        blog = get_object_or_404(Blog, pk=self.kwargs['pk'])
+        liked = False
+        if blog.likes.filter(pk=self.request.user.id).exists():
+            liked = True
+
+        likes_count = blog.total_likes()
+        contex['likes'] = likes_count
+        contex['liked'] = liked
+
+        return contex
     
 
 
@@ -46,14 +59,15 @@ class CreateBlogView(LoginRequiredMixin, generic.CreateView):
     form_class = CreateBlogForm
 
     def form_valid(self,form):
-        form.instance.author_id = self.kwargs['pk']
+        author_id = User.objects.filter(username = self.kwargs['user'])[0].pk
+        form.instance.author_id = author_id
         return super().form_valid(form)
 
 class UpdateBlogView(LoginRequiredMixin, generic.UpdateView):
     login_url = '/login/'
     redirect_field_name = 'user/blogDetail.html'
     model = Blog
-    template_name = 'user/createBlog.html'
+    template_name = 'user/updateBlog.html'
     # fields = ('title','content')
     form_class = CreateBlogForm
 
@@ -80,7 +94,8 @@ class DraftListView(LoginRequiredMixin,generic.ListView):
 class DeleteBlogView(LoginRequiredMixin,generic.DeleteView):
     model = Blog
     template_name = 'user/deleteBlog.html'
-    success_url = reverse_lazy('user:myBlogs')
+    def get_success_url(self):
+        return reverse_lazy('user:myBlogs',kwargs={'user':self.kwargs['user']})
     context_object_name = 'blog'
 
 @login_required
@@ -134,3 +149,13 @@ def CategoryView(request, category,user="",page=""):
     
 
     return render(request, 'user/category.html', {'category': category,'blogs':data,'cat_list':cat_list})
+
+@login_required
+def like_blog(request,pk):
+    blog = get_object_or_404(Blog, id=pk)
+    if blog.likes.filter(pk = request.user.id).exists():
+        blog.likes.remove(request.user)
+    else:
+        blog.likes.add(request.user)
+
+    return HttpResponseRedirect(reverse('blog-detail',kwargs={'pk':pk}))
