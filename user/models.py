@@ -64,3 +64,22 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return reverse('blog-detail', kwargs={'pk':self.blog_id})
     
+
+class UserProfile(models.Model):
+
+    user = models.OneToOneField(User, related_name="profile",on_delete=models.CASCADE)
+
+    # Adding additional feilds
+
+    profile_pic = models.ImageField(blank=True,null=True,upload_to='images/profile')
+    email = models.EmailField(blank=True)
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    description = models.TextField(max_length=100, blank=True)
+     
+
+    def __str__(self):
+        return f'USER NAME: {self.user.username}'
+    
+    def get_absolute_url(self):
+        return reverse('user:myProfile',kwargs={'user':self.user.username})

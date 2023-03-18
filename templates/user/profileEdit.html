@@ -4,19 +4,21 @@
     <link rel="stylesheet" href="/static/css/register.css">
 {% endblock %}
 {% block body_block %}
+    {% if user.profile.pk == pk%}
     <h2 class="text-center">
-        Register Yourself
+        Update Profile
     </h2>
-    <div class="formt">
-
-        <form method="post" class="container">
+        <form method="post" class="container" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="text-center">
                 
-                <button class="btn btn-success " type="submit">Register</button>
+                <button class="btn btn-success " type="submit">Update</button>
+                
             </div>
             
         </form>
-    </div>
+    {% else %}
+        <h2 class="text-center">Sorry!no such page exist.</h2>
+    {% endif %}
 {% endblock %}

@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 {% extends 'main/base.html' %}
 {% block link_block %}
+    <link rel="stylesheet" href="/static/css/remove.css">
     <link rel="stylesheet" href="/static/css/myProfile.css">
 {% endblock %}
 {% block body_block %}
     <div class="container" id="userInfo">
-        <div class='user' id="pic">
-            <h2>Profile Photo</h2>
-            <h6>Feature Coming Soon</h6>
+        <div class="user" id="pic">
+            {% if user.profile.profile_pic %}
+            <img src="{{ user.profile.profile_pic.url}}">
+            {%else%}
+            <h3>No Profile Pic</h3>
+            {% endif %}
         </div>
         <div  class='user'>
-            <h5>{{ user.username }}</h5>
-            <h5>{{ user.email }}</h5>
-            <h5>{{ msg }}</h5>
+            <h4>{{ user.username }}</h4>
+            <h5>{{ user.profile.email }}</h5>
+            <h5>{{ user.profile.first_name }} {{ user.profile.last_name }}</h5>
+            <p>{{ user.profile.description }}</p>
+            <div class="text-left">
+                    <a href="{% url 'user:editProfile' user.profile.pk %}" class="btn btn-danger text-left">Edit</a>
+                
+
+            </div>
         </div>
+    </div>
+    <div class="container text-center" id="favouraite" style="margin-top: 10px;">
+        <h2>My Favourite Blogs</h2>
+        <h5>Feature Coming Soon</h5>
     </div>
 {% endblock %}

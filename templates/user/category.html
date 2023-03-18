@@ -15,9 +15,15 @@
                 <h6>By: {{blog.author.username}}</h6>
                 <p>{{ blog.snippet }}</p>
                 <hr>
-                <h5>
-                    Likes: {{ blog|test }}
-                </h5>
+                <div class="lV">
+                    <h5>
+                        Likes: {{ blog|test }}
+                    </h5>
+                    <h5>
+                        Views: {{ blog|views_count }}
+                    </h5>
+                </div>
+                
             </a>
             
         </div>

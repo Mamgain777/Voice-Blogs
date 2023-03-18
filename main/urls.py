@@ -7,5 +7,6 @@ app_name = 'main'
 urlpatterns = [
     path('',views.HomePage.as_view(), name='home'),
     # path('login',views.LoginPage.as_view(), name='login'),
-    path('register',views.RegisterPage.as_view(), name='register')
+    path('register',views.register_user, name='register'),
+    path('<str:user>/create-profile',views.profile_save, name='profile')
 ]

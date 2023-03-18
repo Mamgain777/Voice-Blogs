@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy,reverse
 from django.views import generic
-from user.models import Blog, Comment, Category
+from user.models import Blog, Comment, Category, UserProfile
 from user.forms import CommentForm,CreateBlogForm
+from main.forms import UserProfileForm
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -166,3 +167,19 @@ def like_blog(request,pk):
 def profile_page(request,user):
 
     return render(request, 'user/profile.html', {'msg':f"Hello {user}"})
+
+
+class UpdateProfileView(LoginRequiredMixin, generic.UpdateView):
+    login_url = '/login/'
+    redirect_field_name = 'user/profile.html'
+    model = UserProfile
+    template_name = 'user/profileEdit.html'
+    # fields = ('title','content')
+    form_class = UserProfileForm
+
+    def get_context_data(self,*args, **kwargs):
+        contex =  super(UpdateProfileView,self).get_context_data(*args,**kwargs)
+        contex['pk'] = self.kwargs['pk']
+        
+        
+        return contex

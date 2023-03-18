@@ -6,24 +6,22 @@
     <div class="blogs">
         {% for blog in blogs %}
         <div class="blog container-fluid">
+            <a href="{% url 'blog-detail' blog.pk %}">
             <h6 class="text-center">{{blog.publish_date|date:"d/m/y"}}</h6>
             <hr>
-            <a href="{% url 'blog-detail' blog.pk %}">
                 <h4>{{blog.title}}</h4>
                 <h6>By: {{blog.author.username}}</h6>
                 <p>{{ blog.snippet }}</p>
+                <hr>
+                <div class="lV">
+                    <h5>
+                        Likes: {{ blog|test }}
+                    </h5>
+                    <h5>
+                        Views: {{ blog|views_count }}
+                    </h5>
+                </div>
             </a>
-            <hr>
-            <div class="lV">
-                <h5>
-                    Likes: {{ blog|test }}
-                </h5>
-                <h5>
-                    Views: {{ blog|views_count }}
-                </h5>
-            </div>
-            
-                    
         </div>
         {% endfor %}
     </div>
