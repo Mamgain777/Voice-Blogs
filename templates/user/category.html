@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 {% extends 'main/base.html'%}
+{% load my_filters %}
 {% block body_block %}
     {% include 'main/category_list.html'%}
     {% if blogs %}
-    <div class="blog-all container-fluid">
+    <div class="blogs container-fluid">
 
         {% for blog in blogs %}
         <div class="blog container-fluid">
             <a href="{% url 'blog-detail' blog.pk %}">
-
-                <h3 class="text-center">{{blog.title}}</h3>
-                <h6 class="text-center">By: {{blog.author.username}}</h6>
                 <h6 class="text-center">{{blog.publish_date|date:"d/m/y"}}</h6>
-                
-                <!-- <p>{{ blog.content|slice:":100" }}..........</p> -->
+                <hr>
+                <h4>{{blog.title}}</h4>
+                <h6>By: {{blog.author.username}}</h6>
+                <p>{{ blog.snippet }}</p>
+                <hr>
+                <h5>
+                    Likes: {{ blog|test }}
+                </h5>
             </a>
             
         </div>

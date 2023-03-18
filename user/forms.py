@@ -34,13 +34,14 @@ class CreateBlogForm(forms.ModelForm):
 
     class Meta:
         model = Blog
-        fields = ('title','title_tag', 'category','content')
+        fields = ('title','title_tag', 'category', 'snippet','content')
 
         labels = {
             'title': '',
             'title_tag': '',
             'category': '',
-            'content': 'Content'
+            'content': 'Content',
+            'snippet': '',
         }
 
         widgets = {
@@ -61,5 +62,12 @@ class CreateBlogForm(forms.ModelForm):
             "content": forms.Textarea(attrs={
             'style': f"resize:none;{input_style}",
             'class': "editable medium-editor-textarea form form-control",
+            }),
+            "snippet": forms.Textarea(attrs={
+            'style': f"resize:none;{input_style}",
+            'rows':4,
+            'cols':6,
+            'placeholder': "Enter your article snippet",
+            'class': "form form-control text-center",
             })
         }

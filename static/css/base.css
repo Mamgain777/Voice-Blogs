@@ -2,20 +2,26 @@ body::-webkit-scrollbar{
     display: none;
   }
 
+
 #navbar_test{
     /* border: 2px solid black; */
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
 }
 
+
 .blog{
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: yellowgreen;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 80%;
+    border: 1px solid black;
+    background-color: whitesmoke;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 70%;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    
 }
 
 .blog a{
@@ -27,6 +33,18 @@ body::-webkit-scrollbar{
     background-color: skyblue;
 }
 
+
+.blogs{
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0, 1fr));
+}
+
+@media only screen and (max-width: 700px){
+    .blogs{
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 
 
