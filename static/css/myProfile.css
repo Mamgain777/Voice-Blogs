@@ -1,3 +1,19 @@
+@media screen and (max-width: 700px) {
+    
+    #userInfo{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        width: auto;
+    }
+    
+    #pic img{
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+    }
+}
 #userInfo{
     border: 1px solid black;
     background-color: aliceblue;
@@ -30,18 +46,5 @@
     width: 200px;
 }
 
-@media screen and (max-width: 700px) {
-    
-    #userInfo{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        margin-bottom: 20px;
-    }
-    #pic img{
-        border-radius: 50%;
-        height: 150px;
-        width: 150px;
-    }
-}
+
 

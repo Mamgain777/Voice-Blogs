@@ -31,8 +31,8 @@
         <a class="navbar-brand" href="{% url 'main:home' %}">VOICE</a>
       </div>
       {% if user.is_authenticated %}
-      <div>
-        <h2 class="text-center">Welcome {{user.username}}</h2>
+      <div id="user_name">
+        <h2 class="text-center" >{{user.username}}</h2>
       </div>
       {% endif %}
       

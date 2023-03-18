@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-zf15m60_a@e$9jn665+q59^q0@#+tf0&mhk0mp@wm97xwj9w(9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.29.77']
 
 # setting upp static and media files
 TEMPLATE_DIR = Path.joinpath(BASE_DIR,'templates')
@@ -139,3 +139,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Redirecting after login
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'height': 200,
+        'width': 880,
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format'],
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source'],
+            ['Image'],
+        ]
+    },
+    
+}
