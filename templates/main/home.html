@@ -14,9 +14,15 @@
                 <p>{{ blog.snippet }}</p>
             </a>
             <hr>
-            <h5>
-                Likes: {{ blog|test }}
-            </h5>
+            <div class="lV">
+                <h5>
+                    Likes: {{ blog|test }}
+                </h5>
+                <h5>
+                    Views: {{ blog|views_count }}
+                </h5>
+            </div>
+            
                     
         </div>
         {% endfor %}

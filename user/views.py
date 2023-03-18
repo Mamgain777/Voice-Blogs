@@ -41,6 +41,8 @@ class BlogDetailView(LoginRequiredMixin, generic.DetailView):
         liked = False
         if blog.likes.filter(pk=self.request.user.id).exists():
             liked = True
+        if not blog.views.filter(pk=self.request.user.id).exists():
+            blog.views.add(self.request.user)
 
         likes_count = blog.total_likes()
         contex['likes'] = likes_count
@@ -159,3 +161,8 @@ def like_blog(request,pk):
         blog.likes.add(request.user)
 
     return HttpResponseRedirect(reverse('blog-detail',kwargs={'pk':pk}))
+
+@login_required
+def profile_page(request,user):
+
+    return render(request, 'user/profile.html', {'msg':f"Hello {user}"})

@@ -23,6 +23,7 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=40)
     likes = models.ManyToManyField(User, related_name="blog_likes")
+    views = models.ManyToManyField(User, related_name="blog_views")
     snippet = models.TextField(max_length=100)
 
     class Meta:
@@ -30,6 +31,9 @@ class Blog(models.Model):
 
     def total_likes(self):
         return self.likes.count()
+    
+    def total_views(self):
+        return self.views.count()
 
     def publish(self):
         self.publish_date = timezone.now()

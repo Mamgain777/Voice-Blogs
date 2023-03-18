@@ -82,3 +82,10 @@ body::-webkit-scrollbar{
 .deleteBlog a{
     margin-left: 10px;
 }
+
+/* Views and likes of article snippet */
+.lV{
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+}

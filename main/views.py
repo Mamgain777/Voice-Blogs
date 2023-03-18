@@ -28,7 +28,7 @@ class HomePage(generic.ListView):
 
 class RegisterPage(generic.CreateView):
     
-    template_name = 'main/register.html'
+    template_name = 'registration/register.html'
     form_class = CustomUserCreationForm
     # fields = ('username','email','password','first_name','last_name')
     success_url = reverse_lazy('login')

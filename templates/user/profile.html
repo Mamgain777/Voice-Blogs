@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'main/base.html' %}
+{% block link_block %}
+    <link rel="stylesheet" href="/static/css/myProfile.css">
+{% endblock %}
+{% block body_block %}
+    <div class="container" id="userInfo">
+        <div class='user' id="pic">
+            <h2>Profile Photo</h2>
+            <h6>Feature Coming Soon</h6>
+        </div>
+        <div  class='user'>
+            <h5>{{ user.username }}</h5>
+            <h5>{{ user.email }}</h5>
+            <h5>{{ msg }}</h5>
+        </div>
+    </div>
+{% endblock %}
