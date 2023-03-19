@@ -77,3 +77,6 @@ def profile_save(request,user):
     else:
         return render(request,'main/error.html')
 
+
+def about_page(request):
+    return render(request, 'main/about.html')

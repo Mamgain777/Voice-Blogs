@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-zf15m60_a@e$9jn665+q59^q0@#+tf0&mhk0mp@wm97xwj9w(9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.29.77']
+ALLOWED_HOSTS = []
 
 # setting upp static and media files
 TEMPLATE_DIR = Path.joinpath(BASE_DIR,'templates')
