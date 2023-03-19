@@ -31,7 +31,7 @@ def register_user(request):
 
     form = CustomUserCreationForm()
     if request.method == "POST":
-        print("Check point 1")
+        # print("Check point 1")
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -64,14 +64,17 @@ def profile_save(request,user):
             profile.user = user_is
 
             if 'profile_pic' in request.FILES:
-                print('Found It!')
+                # print('Found It!')
                 profile.profile_pic = request.FILES['profile_pic']
 
             profile.save()
             return HttpResponseRedirect(reverse('login'))
         
     user = User.objects.filter(username=user)[0]
-    if user == []:
+    print(user)
+    profile = UserProfile.objects.filter(user=user)
+    print(profile)
+    if len(profile) == 0:
         form = UserProfileForm()
         return render(request,'user/profileCreate.html', {'form':form,'user':user})
     else:

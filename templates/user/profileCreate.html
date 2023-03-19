@@ -2,15 +2,12 @@
 {% extends 'main/base.html'%}
 {% block link_block%}
     <link rel="stylesheet" href="/static/css/register.css">
+    <link rel="stylesheet" href="/static/css/create_profile.css">
 {% endblock %}
 {% block body_block %}
-    {% if user.is_authenticated %}
-     <h2 class="text-center">Sorry! this page does not exist</h2>
-    {% elif msg %}
-     <h2 class="text-center">Sorry! this page does not exist</h2>
-    {% else %}
+    
     <h2 class="text-center">
-        Register Yourself
+        Create Profile
     </h2>
         <form method="post" class="container" enctype="multipart/form-data">
             {% csrf_token %}
@@ -22,5 +19,4 @@
             </div>
             
         </form>
-    {% endif %}
 {% endblock %}
