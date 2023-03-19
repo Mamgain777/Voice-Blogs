@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 {% extends 'main/base.html' %}
+{% load static%}
 {% block link_block %}
     <link rel="stylesheet" href="/static/css/remove.css">
     <link rel="stylesheet" href="/static/css/myProfile.css">
 {% endblock %}
 {% block body_block %}
-    
-    <div class="container" id="userInfo">
-        <div class="user" id="pic">
-            {% if user.profile.profile_pic %}
-            <img src="{{ user.profile.profile_pic.url}}">
-            {%else%}
-            <h3>No Profile Pic</h3>
-            {% endif %}
-        </div>
-        <div  class='user'>
-            <h4>{{ user.username }}</h4>
-            <h5>{{ user.profile.email }}</h5>
-            <h5>{{ user.profile.first_name }} {{ user.profile.last_name }}</h5>
-            <p>{{ user.profile.description }}</p>
-            <div class="text-left">
-                    <a href="{% url 'user:editProfile' user.profile.pk %}" class="btn btn-danger text-left">Edit</a>
-                
 
-            </div>
+{%if check == user.username %}
+    
+<div class="card container" style="margin-top:20px" id="profile-box">
+<div class="row">
+  <div class="col-sm-4 text-center">
+    {% if user.profile.profile_pic%}
+        <img src="{{user.profile.profile_pic.url}}" class="rounded-circle border border-primary" style="margin: 10px;">
+    {% else %}
+        <img src="{% static 'images/default_profile.png' %}" class="rounded-circle border border-primary" style="margin: 10px;">
+    {% endif %}
+  </div>
+  <div class="col-sm-8">
+    <div class="card-body" style="display: grid;grid-template-rows: 5fr 1fr;">
+        <div class="profile">
+            <h4 class="card-title">{{user.profile.first_name}} {{user.profile.last_name}}</h4>
+            <h5 class="card-title">{{user.username}}</h5>
+            <h6>{{user.profile.email}}</h6>
+            <p>{{user.profile.description}}</p>
         </div>
+        <div class="edit">
+            <a href="{% url 'user:editProfile' user.profile.pk %}" class="btn btn-danger">Edit</a>
+        </div>
+      
     </div>
+  </div>
+</div>
+</div>
     <div class="container text-center" id="favouraite" style="margin-top: 10px;">
         <h2>My Favourite Blogs</h2>
         <h5>Feature Coming Soon</h5>
     </div>
+
+{% else %}
+<h1 class="text-center">Sorry! No such page exist</h1>
+{% endif %}
 {% endblock %}

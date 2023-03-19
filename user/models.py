@@ -72,10 +72,10 @@ class UserProfile(models.Model):
     # Adding additional feilds
 
     profile_pic = models.ImageField(blank=True,null=True,upload_to='images/profile')
-    email = models.EmailField(blank=True)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    description = models.TextField(max_length=100, blank=True)
+    email = models.EmailField()
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    description = models.TextField(max_length=250, blank=True)
      
 
     def __str__(self):

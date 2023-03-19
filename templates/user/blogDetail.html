@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 {% extends 'main/base.html'%}
+{% load static %}
 {% block title_block %}
 {{blog.title}}
 {% endblock %}
 {% block link_block %}
 <link rel="stylesheet" href="/static/css/remove.css">
+<link rel="stylesheet" href="/static/css/blog_detail.css">
 {% endblock %}
 {% block body_block %}
     
     <div class="container" id="blog-detail">
-        <h2 class="text-center">{{blog.title}}</h2>
+        <h2 class="text-center" style="font-size: 30px;">{{blog.title}}</h2>
         <h6 class="text-center">By: {{blog.author.username}}</h6>
-        <h5 class="text-center" style="color: red; ">{{ blog.title_tag }}</h5>
         {% if blog.publish_date == null %}
         <div class="text-center">
             <a href="{% url 'user:publishBlog' blog.pk%}"><button class="btn btn-warning">Publish</button></a>
@@ -19,7 +20,8 @@
         {% else %}
         <h6 class="text-center">{{blog.publish_date|date:"l, d F Y"}}</h6>
         {% endif %}
-        <p class="text-center"><strong>Category: {{blog.category}}</strong></p>
+        <p class="text-center" style="color: red; ">{{ blog.title_tag }}</p>
+        <!-- <p class="text-center"><strong>Category: {{blog.category}}</strong></p> -->
         <div class="text-center" id="updateLinks">
             
             {% if blog.author.username == user.username %}
@@ -44,6 +46,25 @@
             <a href="{% url 'main:home' %}" class="btn btn-secondary">Home</a>
             
         </div>
+        <hr>
+        <div class="card">
+            <div class="row">
+              <div class="col-sm-2 text-center">
+                {% if blog.author.profile.profile_pic%}
+                    <img src="{{blog.author.profile.profile_pic.url}}" class="rounded-circle border border-primary" height="150" width="150" style="margin: 10px;">
+                {% else %}
+                    <img src="{% static 'images/default_profile.png' %}" class="rounded-circle border border-primary" height="150" width="150" style="margin: 10px;">
+                {% endif %}
+              </div>
+              <div class="col-sm-10">
+                <div class="card-body">
+                  <h5 class="card-title">{{blog.author.profile.first_name}} {{blog.author.profile.last_name}}</h5>
+                  <h6>{{blog.author.profile.email}}</h6>
+                  <p>{{blog.author.profile.description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         <hr>
         {% if blog.publish_date %}
             <h4>Comments....</h4>

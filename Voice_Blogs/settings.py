@@ -145,7 +145,7 @@ LOGOUT_REDIRECT_URL = "/"
 CKEDITOR_CONFIGS = {
     'default': {
         'height': 200,
-        'width': 880,
+        'width': 280,
         'toolbar': 'Custom',
         'toolbar_Custom': [
             ['Format'],

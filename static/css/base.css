@@ -7,12 +7,14 @@ body::-webkit-scrollbar{
     /* border: 2px solid black; */
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
+    width: 100%;
 }
 
 @media only screen and (max-width: 700px){
     #user_name{
-        color: gray;
+        /* color: gray; */
         margin-top: 10px;
+        
     }
 }
 

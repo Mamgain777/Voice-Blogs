@@ -166,7 +166,7 @@ def like_blog(request,pk):
 @login_required
 def profile_page(request,user):
 
-    return render(request, 'user/profile.html', {'msg':f"Hello {user}"})
+    return render(request, 'user/profile.html', {'check':user})
 
 
 class UpdateProfileView(LoginRequiredMixin, generic.UpdateView):
