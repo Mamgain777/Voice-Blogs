@@ -1,0 +1,99 @@
+body::-webkit-scrollbar{
+    display: none;
+  }
+
+
+#navbar_test{
+    /* border: 2px solid black; */
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    width: 100%;
+}
+
+@media only screen and (max-width: 700px){
+    #user_name{
+        /* color: gray; */
+        margin-top: 10px;
+        
+    }
+}
+
+.blog{
+    border: 1px solid black;
+    background-color: whitesmoke;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 70%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    
+}
+
+.blog a{
+    text-decoration: none;
+    color: black;
+}
+
+.blog:hover{
+    background-color: skyblue;
+}
+
+
+.blogs{
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0, 1fr));
+}
+
+@media only screen and (max-width: 700px){
+    .blogs{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+
+
+#blog-detail{
+    margin-top: 20px;
+}
+
+.funcBlog{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+#comments{
+    margin-top: 10px;
+}
+
+/* .blog-all{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+} */
+
+#createBlog{
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    background-color: skyblue;
+}
+
+.deleteBlog{
+    margin-top: 20px;
+}
+.deleteBlog a{
+    margin-left: 10px;
+}
+
+/* Views and likes of article snippet */
+.lV{
+    display: flex;
+    /* flex-direction: row; */
+    justify-content: space-between;
+}

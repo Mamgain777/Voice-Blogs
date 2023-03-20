@@ -11,3 +11,4 @@ user = User.objects.filter(username="Himani")[0]
 print(user)
 data = UserProfile.objects.filter(user=user)
 print(len(data))
+print('changing')
