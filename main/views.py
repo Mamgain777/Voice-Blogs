@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 
 from main.forms import CustomUserCreationForm,UserProfileForm
 from django.urls import reverse_lazy, reverse
@@ -71,14 +71,13 @@ def profile_save(request,user):
             return HttpResponseRedirect(reverse('login'))
         
     user = User.objects.filter(username=user)[0]
-    print(user)
-    profile = UserProfile.objects.filter(user=user)
-    print(profile)
-    if len(profile) == 0:
+    # print(user)
+    # print(profile)
+    if UserProfile.objects.filter(user=user).count() == 0:
         form = UserProfileForm()
         return render(request,'user/profileCreate.html', {'form':form,'user':user})
     else:
-        return render(request,'main/error.html')
+        return HttpResponseNotFound("No Such Page!!")
 
 
 def about_page(request):
